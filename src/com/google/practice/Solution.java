@@ -1,46 +1,38 @@
 package com.google.practice;
 
+import java.util.*;
+
 public class Solution {
 
-    public Node addTwoList(Node h1, Node h2) {
+    /*
+       input  = 3  1  2  2  1  3  5
+       index =  0  1  2  3  4  5  6
+       First Repeat = 3
+    */
 
-        if (h1 == null && h2 == null) {
-            return null;
-        }
-        if (h1 == null) {
-            return h2;
-        }
-        if (h2 == null) {
-            return h1;
-        }
-        Node h = new Node(0);
-        Node current = h;
-        int carry = 0;
-        while (h1 != null && h2 != null) {
-            int sum = h1.value + h2.value + carry;
-            carry = sum / 10;
-            sum = sum % 10;
-            current.next = new Node(sum);
-            h1 = h1.next;
-            h2 = h2.next;
-            current = current.next;
-        }
+    public static void main(String[] args) {
+        int[] arr = {3, 1, 2, 2, 1, 3, 5};
+        System.out.println("First Repeat >>" + firstRepeating(arr));
 
-        if (h1 != null) {
-            if (carry > 0) {
-                current.next = addTwoList(h1, new Node(carry));
-            } else {
-                current.next = h1;
-            }
-        } else if (h2 != null) {
-            if (carry > 0) {
-                current.next = addTwoList(h2, new Node(carry));
-            } else {
-                current.next = h2;
-            }
-        } else if (h1 == null && h2 == null && carry > 0) {
-            current.next = new Node(carry);
+    }
+
+    public static int firstRepeating(int[] arr) {
+        if (arr == null || arr.length == 0) return -1;
+        LinkedHashMap<Integer, Integer> linkedMap = new LinkedHashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            int cur = arr[i];
+            int count = linkedMap.getOrDefault(cur, 0);
+            linkedMap.put(cur, count + 1);
         }
-        return h.next;
+        int firstRepeat = -1;
+        Set<Map.Entry<Integer, Integer>> entrySet = linkedMap.entrySet();
+        for (Map.Entry<Integer, Integer> entry : entrySet) {
+            if (entry.getValue() > 1) {
+                firstRepeat = entry.getKey();
+                break;
+            }
+        }
+        return firstRepeat;
     }
 }
+

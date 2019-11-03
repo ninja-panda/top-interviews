@@ -37,7 +37,6 @@ class DecodeStringSolution {
                     }
                     // pop the opening [
                     alphabetStack.pop();
-                   // temp = reverse(temp);
                     StringBuilder result = new StringBuilder();
                     while (frequency > 0) {
                         result.append(temp);

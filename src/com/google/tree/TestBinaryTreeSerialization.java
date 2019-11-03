@@ -3,27 +3,19 @@ package com.google.tree;
 public class TestBinaryTreeSerialization {
 
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(30);
+        TreeNode root = new TreeNode(1);
         BinaryTree binaryTree = new BinaryTree(root);
-        TreeNode b = new TreeNode(20);
-        TreeNode c = new TreeNode(40);
-        TreeNode d = new TreeNode(10);
-        TreeNode e = new TreeNode(25);
-        TreeNode f = new TreeNode(35);
-        TreeNode g = new TreeNode(40);
-        TreeNode h = new TreeNode(2);
-        TreeNode i = new TreeNode(25);
-        TreeNode j = new TreeNode(35);
+        TreeNode b = new TreeNode(2);
+        TreeNode c = new TreeNode(3);
+        TreeNode d = new TreeNode(4);
+        TreeNode e = new TreeNode(5);
+
 
         root.left = b;
         root.right = c;
-        b.left = d;
-        b.right = e;
-        c.left = f;
-        c.right = g;
-        d.left = h;
-        d.right = i;
-        e.left = j;
+        c.left = d;
+        c.right = e;
+
 
         binaryTree.prettyPrintTree(root);
         BinaryTreeSerialization binaryTreeSerialization = new BinaryTreeSerialization();
