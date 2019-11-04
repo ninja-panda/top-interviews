@@ -1,32 +1,49 @@
 package com.google.array;
 
-public class MissingRange {
+import java.util.ArrayList;
+import java.util.List;
+
+class RangeFinder {
 
 
-    /**
-     * Input: nums = [0, 1, 3, 50, 75], lower = 0 and upper = 99,
-     * Output: ["2", "4->49", "51->74", "76->99"]
-     * <p>
-     * [-1] lower = -1 and upper = -1
-     * Output: []
-     * <p>
-     * [-1,0,3]  lower = -3 and upper = 3
-     * Output: ["1->2"]
-     */
-    /*public static List<String> findMissingRanges(int[] nums, int lower, int upper) {
-
-        List<String> result = new ArrayList<>();
+    public List<String> findMissingRanges(int[] nums, int lower, int upper) {
+        List<String> rangeList = new ArrayList<>();
+        long low = (long) lower;
+        long high = (long) upper;
         if (nums == null || nums.length == 0) {
-            result.add(getRange(lower, upper));
+            addRange(low, high, rangeList);
+            return rangeList;
         }
-        if(lower < nums[0] && nums[0] - lower != 0)
-
-        return null;
+        if (low < (long) nums[0]) {
+            addRange(low, ((long) nums[0] - 1), rangeList);
+        }
+        for (int i = 0; i < (nums.length - 1); i++) {
+            if ((long) nums[i + 1] - (long) nums[i] > 1) {
+                addRange((long) nums[i] + 1, (long) nums[i + 1] - 1, rangeList);
+            }
+        }
+        if (high > nums[nums.length - 1]) {
+            addRange(nums[nums.length - 1] + 1, high, rangeList);
+        }
+        return rangeList;
     }
 
-    private static String getRange(int lower, int upper) {
-        StringBuilder rangeBuilder = new StringBuilder(lower);
-        rangeBuilder.append("->").append(upper);
-        return rangeBuilder.toString();
-    }*/
+    private void addRange(long low, long high, List<String> rangeList) {
+        if (low == high) {
+            rangeList.add(String.valueOf(low));
+        } else {
+            rangeList.add(String.valueOf(low) + "->" + String.valueOf(high));
+        }
+    }
+
+}
+
+public class MissingRange {
+
+    public static void main(String[] args) {
+        RangeFinder rangeFinder = new RangeFinder();
+        int[] nums = {-2147483648, 2147483647};
+        List<String> result = rangeFinder.findMissingRanges(nums, -2147483648, 2147483647);
+        result.forEach(s -> System.out.println(s));
+    }
 }
