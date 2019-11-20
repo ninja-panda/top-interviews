@@ -5,23 +5,37 @@ import java.util.Set;
 
 class LongestSubstringSolution {
 
-    // abcabcbb
-    public String getLongestSubstring(String s) {
+    public int lengthOfLongestSubstring(String s) {
         if (s == null) {
-            return null;
+            return 0;
         }
+        // The set will be used as a Sliding Window
         Set<Character> set = new HashSet<>();
-        char[] arr = s.toCharArray();
-        for (int i = 0; i < arr.length; i++) {
-            char current = arr[i];
+        int left = 0, right = 0, maxLength = 0;
+        while (right < s.length()) {
+            char current = s.charAt(right);
+            /**
+             *  If right is not in the Window then add
+             *  it to current Window and calculate the
+             *  current max length
+             */
             if (!set.contains(current)) {
                 set.add(current);
-            } else if (set.iterator().next().equals((Character) current)) {
-                set.remove(current);
-                set.add(current);
+                right++;
+                maxLength = Math.max(maxLength, (right - left));
+            } else {
+                /**
+                 *  If duplicate character is found in the right side,
+                 *  then remove one from character from left and side
+                 *  and advance the left pointer by 1
+                 */
+
+                char toRemove = s.charAt(left);
+                set.remove(toRemove);
+                left++;
             }
         }
-        return set.toString();
+        return maxLength;
     }
 }
 

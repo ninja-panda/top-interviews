@@ -8,31 +8,14 @@ public class PlusOneToArray {
     public static void main(String[] args) {
         int[] a = {1, 2, 3};
         int[] b = plusOne(a);
+        System.out.print("(123 + 1) = ");
         print(b);
 
-        int[] a_1 = {9, 9};
-        int[] b_1 = plusOne(a_1);
-        print(b_1);
+        int[] k = {9,9};
+        int[] z = plusOne(k);
+        System.out.print("(99 + 1) = ");
+        print(z);
 
-        int[] a_2 = {9};
-        int[] b_2 = plusOne(a_2);
-        print(b_2);
-
-        int[] a_3 = {8, 9, 9, 9};
-        int[] b_3 = plusOne(a_3);
-        print(b_3);
-    }
-
-    public static void print(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i]);
-            if (i != (arr.length - 1)) {
-                System.out.print(" - ");
-            } else {
-                System.out.println();
-            }
-        }
-        System.out.println("--------------");
     }
 
     public static int[] plusOne(int[] digits) {
@@ -73,5 +56,20 @@ public class PlusOneToArray {
             digits[i] = digits[j];
             digits[j] = temp;
         }
+    }
+
+    /**
+     * Following method is used to print the array
+     */
+    public static void print(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i != (arr.length - 1)) {
+                System.out.print(" - ");
+            } else {
+                System.out.println();
+            }
+        }
+        System.out.println();
     }
 }

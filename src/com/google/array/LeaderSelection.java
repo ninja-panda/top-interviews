@@ -14,23 +14,20 @@ public class LeaderSelection {
         System.out.println("Leaders are >> " + getLeaders(arr2));
     }
 
-    public static List<Integer> getLeaders(int[] arr) {
-        List<Integer> leaders = new ArrayList<>();
-        if (arr == null) {
-            return leaders;
-        }
-        /* Rightmost element is always leader */
-        int curLeader = arr[arr.length - 1];
-        leaders.add(curLeader);
-        for (int i = (arr.length - 1); i >= 0; i--) {
-            if (i == (arr.length - 1)) {
-                continue;
-            }
-            if (arr[i] >= curLeader) {
-                curLeader = arr[i];
-                leaders.add(curLeader);
+    public static List<Integer> getLeaders(int[] nums) {
+        List<Integer> leaderList = new ArrayList<>();
+        if (nums == null || nums.length == 0) return leaderList;
+        int r = (nums.length - 1);
+        leaderList.add(nums[r]);
+        int currentLeader = nums[r];
+        for (int i = r; i >= 0; i--) {
+            int cur = nums[i];
+            if (cur > currentLeader) {
+                currentLeader = cur;
+                leaderList.add(currentLeader);
             }
         }
-        return leaders;
+        return leaderList;
+
     }
 }

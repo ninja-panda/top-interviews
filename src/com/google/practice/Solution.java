@@ -1,38 +1,52 @@
 package com.google.practice;
 
-import java.util.*;
 
-public class Solution {
+class Solution {
+    int[] nums;
+    int target;
 
-    /*
-       input  = 3  1  2  2  1  3  5
-       index =  0  1  2  3  4  5  6
-       First Repeat = 3
-    */
-
-    public static void main(String[] args) {
-        int[] arr = {3, 1, 2, 2, 1, 3, 5};
-        System.out.println("First Repeat >>" + firstRepeating(arr));
-
+    public int search(int[] nums, int target) {
+        if (nums == null || nums.length == 0) return -1;
+        // When there is only one element in the array
+        if (nums.length == 1) {
+            return nums[0] == target ? 0 : -1;
+        }
+        int len = (nums.length - 1);
+        this.nums = nums;
+        this.target = target;
+        int rotationPoint = getRotationPoint();
+        // When there is no rotation present in the array
+        if (rotationPoint == 0) return search(0, len);
+        // search in the left side
+        if (nums[0] < target) return search(0, rotationPoint);
+            // search in the right side
+        else return search(rotationPoint, len);
     }
 
-    public static int firstRepeating(int[] arr) {
-        if (arr == null || arr.length == 0) return -1;
-        LinkedHashMap<Integer, Integer> linkedMap = new LinkedHashMap<>();
-        for (int i = 0; i < arr.length; i++) {
-            int cur = arr[i];
-            int count = linkedMap.getOrDefault(cur, 0);
-            linkedMap.put(cur, count + 1);
+    /**
+     * Find the Rotation point of the array. Returns 0
+     * if there is no rotation present in the array.
+     **/
+    private int getRotationPoint() {
+        int len = nums.length - 1;
+        if (nums[0] < nums[len]) return 0;
+        int left = 0, right = len;
+        while (left < right) {
+            int pivot = left + (right - left) / 2;
+            if (nums[pivot] > nums[pivot + 1]) return (pivot + 1);
+            else if (nums[pivot] > nums[left]) left = (pivot + 1);
+            else right = pivot;
         }
-        int firstRepeat = -1;
-        Set<Map.Entry<Integer, Integer>> entrySet = linkedMap.entrySet();
-        for (Map.Entry<Integer, Integer> entry : entrySet) {
-            if (entry.getValue() > 1) {
-                firstRepeat = entry.getKey();
-                break;
-            }
+        return 0;
+    }
+
+    private int search(int left, int right) {
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) return mid;
+            if (nums[mid] > target) right = (mid - 1);
+            else left = (mid + 1);
         }
-        return firstRepeat;
+        return -1;
     }
 }
-
