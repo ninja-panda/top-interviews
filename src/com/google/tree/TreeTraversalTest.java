@@ -13,6 +13,8 @@ public class TreeTraversalTest {
 		TreeNode node_4 = new TreeNode(5);
 		TreeNode node_5 = new TreeNode(6);
 		TreeNode node_6 = new TreeNode(7);
+		TreeNode node_7 = new TreeNode(8);
+		TreeNode node_8 = new TreeNode(9);
 
 		root.left = node_1;
 		root.right = node_2;
@@ -20,19 +22,16 @@ public class TreeTraversalTest {
 		node_1.right = node_4;
 		node_2.left = node_5;
 		node_2.right = node_6;
+		node_3.left = node_7;
+		node_3.right = node_8;
 
 		System.out.println("Original Binary Tree");
 		binaryTree.prettyPrintTree(root);
 
-		TreeTraversal treeTraversal = new TreeTraversal();
-
-		List <List<Integer>> nodeList = treeTraversal.iterativeLevelOrderTraversal(root);
-		System.out.println("Iterative Level Order Traversal");
+		ZigZagTraversal traversal = new ZigZagTraversal();
+		List <List<Integer>> nodeList = traversal.zigzagLevelOrder(root);
+		System.out.println("ZicZac Level Order Traversal");
 		print(nodeList);
-
-		List <List<Integer>> nodeList_1 = treeTraversal.recursiveOrderTraversal(root);
-		System.out.println("Recursive Level Order Traversal");
-		print(nodeList_1);
 	}
 
 	private static void print(List<List<Integer>> nodeList) {

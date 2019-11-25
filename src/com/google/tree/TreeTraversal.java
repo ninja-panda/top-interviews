@@ -8,13 +8,13 @@ import java.util.Queue;
 public class TreeTraversal {
 
 	public List<List<Integer>> iterativeLevelOrderTraversal(TreeNode root) {
-		List <List<Integer>> nodeList = new ArrayList <> ();
+		List<List<Integer>> nodeList = new ArrayList<>();
 		if (root == null) return nodeList;
-		Queue <TreeNode> queue = new LinkedList <> ();
+		Queue<TreeNode> queue = new LinkedList<>();
 		queue.add(root);
 		int level = 0;
 		while (!queue.isEmpty()) {
-			nodeList.add(new ArrayList < > ());
+			nodeList.add(new ArrayList<>());
 			int no_of_nodes = queue.size();
 			for (int i = 0; i < no_of_nodes; i++) {
 				TreeNode node = queue.remove();
@@ -27,7 +27,7 @@ public class TreeTraversal {
 		return nodeList;
 	}
 
-	List<List<Integer>> nodeList = new ArrayList <> ();
+	List <List<Integer>> nodeList = new ArrayList <>();
 
 	public List<List<Integer>> recursiveOrderTraversal(TreeNode root) {
 		if (root == null) return nodeList;
@@ -37,7 +37,7 @@ public class TreeTraversal {
 
 	private void _levelOrder(TreeNode node, int level) {
 		if (nodeList.size() == level) {
-			nodeList.add(new ArrayList <>());
+			nodeList.add(new ArrayList<>());
 		}
 		nodeList.get(level).add(node.val);
 		if (node.left != null) _levelOrder(node.left, (level + 1));
