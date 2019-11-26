@@ -17,21 +17,6 @@ public class LinkedList {
         temp.next = node;
     }
 
-    public ListNode reverse() {
-        if (head == null) {
-            return null;
-        }
-        ListNode current = head;
-        ListNode previous = null;
-        while (current != null) {
-            ListNode next = current.next;
-            current.next = previous;
-            previous = current;
-            current = next;
-        }
-        return previous;
-    }
-
     public void print() {
         ListNode temp = head;
         while (temp != null) {
