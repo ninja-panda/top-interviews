@@ -11,4 +11,17 @@ public class TreeNode {
         this.left = null;
         this.right = null;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TreeNode)) return false;
+        TreeNode node = (TreeNode) o;
+        return val == node.val;
+    }
+
+    @Override
+    public int hashCode() {
+        return val;
+    }
 }
