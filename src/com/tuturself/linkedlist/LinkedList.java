@@ -2,7 +2,7 @@ package com.tuturself.linkedlist;
 
 public class LinkedList {
 
-    ListNode head;
+    public ListNode head;
 
     public LinkedList(int v) {
         head = new ListNode(v);
